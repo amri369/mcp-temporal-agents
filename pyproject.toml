@@ -1,12 +1,13 @@
 [project]
-name = "fastprod"
+name = "mcp-temporal-agents"
 version = "0.1.0"
 description = "Example how to build production-ready agents using MCP, Temporal and OpenAI Agents SDK"
 readme = "README.md"
 requires-python = "==3.12.9"
-authors = [{ name = "Amri", email = "amri369@gmail.com"}]
+authors = [{ name = "Mohamed Amri", email = "amri369@gmail.com"}]
 
 dependencies = [
+    "fastapi==0.115.8",
     "logfire==3.21.2",
     "openai==1.97.1",
     "openai-agents==0.2.5",
@@ -14,6 +15,7 @@ dependencies = [
     "pytest==8.3.3",
     "ruff==0.12.8",
     "temporalio==1.15.0",
+    "uvicorn==0.35.0",
 ]
 
 [tool.uv.workspace]
