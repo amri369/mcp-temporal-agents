@@ -1,3 +1,4 @@
+from enum import Enum
 from pydantic import BaseModel
 
 class AnalysisSummary(BaseModel):
@@ -31,3 +32,15 @@ class FinancialReportData(BaseModel):
 
     follow_up_questions: list[str]
     """Suggested follow‑up questions for further research."""
+
+class AgentsChoices(str, Enum):
+    FinancialPlannerAgent       = "FinancialPlannerAgent"
+    FinancialSearchAgent        = "FinancialSearchAgent"
+    FundamentalsAnalystAgent    = "FundamentalsAnalystAgent"
+    RiskAnalystAgent            = "RiskAnalystAgent"
+    FinancialWriterAgent        = "FinancialWriterAgent"
+    VerificationAgent           = "VerificationAgent"
+
+class AgentRunnerParams(BaseModel):
+    agent_choice: AgentsChoices
+    message: str

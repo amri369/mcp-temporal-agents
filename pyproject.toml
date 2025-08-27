@@ -8,13 +8,12 @@ authors = [{ name = "Mohamed Amri", email = "amri369@gmail.com"}]
 
 dependencies = [
     "fastapi==0.115.8",
-    "logfire==3.21.2",
-    "openai==1.97.1",
-    "openai-agents==0.2.5",
+    "logfire==4.3.6",
+    "openai-agents==0.2.9",
     "pydantic==2.11.7",
     "pytest==8.3.3",
     "ruff==0.12.8",
-    "temporalio==1.15.0",
+    "temporalio==1.16.0",
     "uvicorn==0.35.0",
 ]
 

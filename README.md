@@ -25,5 +25,27 @@ source .venv/bin/activate
 In this example, we package the prompts of [the financial analyst example](https://github.com/openai/openai-agents-python/tree/main/examples/financial_research_agent) in an MCP server. 
 In addition, we add a few tools as illustration examples
 ```
-uvicorn mcp.main:app --reload --port 9000
+uvicorn examples.mcp_server.main:app --reload --port 9000
+```
+
+# 3. Start a Temporal server
+Execute the following commands to start a pre-built image along with all the dependencies.
+
+```bash
+brew install temporal
+temporal server start-dev
+```
+
+# 4. Start a Temporal worker
+Execute the following command to start a worker to run the examples. 
+Ensure that all your environment variables reside at file .env.
+
+```bash
+uv run --env-file .env examples/worker.py
+```
+
+# 5. Start the financial analyst agent
+
+```bash
+uv run --env-file .env examples/main.py
 ```
