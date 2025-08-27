@@ -18,8 +18,8 @@ agents_mapper = {
         get_mcp_agent,
         agent_name="FinancialSearchAgent",
         prompt_name="search_prompt",
-        output_type=FinancialSearchPlan,
-        tools=[WebSearchTool],
+        tools=[WebSearchTool()],
+        output_type=AnalysisSummary,
     ),
     "FundamentalsAnalystAgent": partial(
         get_mcp_agent,
@@ -49,11 +49,9 @@ agents_mapper = {
 
 @activity.defn
 async def run_agent_activity(params: AgentRunnerParams):
-    # CALL the factory to get a fresh ctx manager instance
     async with agents_mapper[params.agent_choice]() as agent:
         activity.logger.info(
             f"Running agent: {params.agent_choice} with message {params.message}"
         )
         result = await Runner.run(starting_agent=agent, input=params.message)
-        activity.logger.info(result.final_output)
         return result.final_output

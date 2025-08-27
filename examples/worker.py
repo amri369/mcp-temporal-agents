@@ -2,7 +2,6 @@ import asyncio
 
 import logfire
 from temporalio.client import Client
-from temporalio.contrib.openai_agents import OpenAIAgentsPlugin
 from temporalio.worker import Worker
 
 from config import settings
@@ -16,9 +15,6 @@ if settings.logfire_token:
 async def main():
     client = await Client.connect(
         settings.temporal_server_url,
-        plugins=[
-            OpenAIAgentsPlugin(),
-        ],
     )
 
     worker = Worker(

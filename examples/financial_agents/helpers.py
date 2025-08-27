@@ -56,7 +56,7 @@ def get_agent(
 async def get_mcp_agent(
         agent_name: str,
         prompt_name: str,
-        output_type: Any,
+        output_type: Any = None,
         tools: List[Tool | str] | None = None,
 ) -> AsyncIterator[Agent]:
 
