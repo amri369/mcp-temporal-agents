@@ -1,8 +1,9 @@
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator, List
 
-from agents import Agent
+from agents import Agent, Tool
 from agents.mcp import MCPServer, MCPServerStreamableHttp, create_static_tool_filter
+from agents.model_settings import ModelSettings
 
 from config import settings
 
@@ -28,7 +29,18 @@ def get_agent(
         instructions: str,
         mcp_servers: List[MCPServer] | None = None,
         output_type: Any,
+        tools: List[Tool | str] | None = None,
 ) -> Agent:
+
+    if mcp_servers and tools:
+        return Agent(
+                name=name,
+                instructions=instructions,
+                mcp_servers=mcp_servers,
+                output_type=output_type,
+                tools=tools,
+                model_settings=ModelSettings(tool_choice="required")
+            )
 
     if mcp_servers:
         return Agent(
@@ -41,10 +53,11 @@ def get_agent(
     return Agent(name=name, instructions=instructions)
 
 @asynccontextmanager
-async def get_agent(
-        agents_name: str,
+async def get_mcp_agent(
+        agent_name: str,
         prompt_name: str,
-        output_type: Any
+        output_type: Any,
+        tools: List[Tool | str] | None = None,
 ) -> AsyncIterator[Agent]:
 
     server = make_server()
@@ -52,10 +65,11 @@ async def get_agent(
         instructions = await s.session.get_prompt(prompt_name)
         prompt_text = instructions.messages[0].content.text
         agent = get_agent(
-            name=agents_name,
+            name=agent_name,
             instructions=prompt_text,
             mcp_servers=[s],
             output_type=output_type,
+            tools=tools
         )
 
         yield agent

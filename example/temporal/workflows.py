@@ -1,4 +1,4 @@
-from agents import Agent, Runner
+from openai_agents import Agent, Runner
 from temporalio import workflow
 
 
