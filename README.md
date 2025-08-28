@@ -7,8 +7,13 @@ This project shows how to build **durable AI agents** using three production-gra
 - [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol/python-sdk) — standard interface for tools and data sources
 - **(Optional)** [Pydantic Logfire](https://pydantic.dev/logfire) — unified observability (logs, traces, metrics) with native LLM & agent instrumentation
 
+# Credit
 
-This example is inspired by [Temporal’s integration with the OpenAI Agents SDK](https://temporal.io/blog/announcing-openai-agents-sdk-integration) and is accompanied by this [Medium article](https://medium.com/p/c49c928bc4ec/edit).
+This example is inspired by these two great examples:
+- [Open AI Agents SDK - Financial Research Agent Example](https://github.com/openai/openai-agents-python/tree/main/examples/financial_research_agent)
+- [Temporal - Financial Research Example](https://github.com/temporalio/samples-python/tree/main/openai_agents/financial_research_agent)
+
+Readers are invited to visit this [Medium article](https://medium.com/p/c49c928bc4ec/edit) for more details.
 
 If you’re tired of debugging Celery tasks, running into scalability limits, or wrestling with LangGraph dependency issues, this tutorial is for you.
 
