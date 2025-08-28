@@ -5,7 +5,9 @@ from temporalio import workflow
 
 with workflow.unsafe.imports_passed_through():
     from examples.financial_research_agent.models import (
-        AgentRunnerParams, AgentsChoices, FinancialSearchPlan
+        AgentRunnerParams, AgentsChoices,
+        FinancialSearchPlan, FinancialReportData,
+        VerificationResult, FinancialReportWorkflowOutput
     )
     from examples.financial_research_agent.temporal.activities import run_agent_activity
 
@@ -66,4 +68,35 @@ class FinancialResearchWorkflow:
                 seconds=60
             ),
         )
-        return report
+
+        report = FinancialReportData(**report)
+        payload = AgentRunnerParams(
+            agent_choice=AgentsChoices.VerificationAgent,
+            message=str(report)
+        )
+
+        verification = await workflow.execute_activity(
+            run_agent_activity,
+            payload,
+            start_to_close_timeout=timedelta(
+                seconds=60
+            ),
+            schedule_to_close_timeout=timedelta(
+                seconds=60
+            ),
+        )
+
+        verification = VerificationResult(**verification)
+
+        print("\n\n=====REPORT=====\n\n")
+        print(f"Report:\n{report.markdown_report}")
+        print("\n\n=====FOLLOW UP QUESTIONS=====\n\n")
+        print("\n".join(report.follow_up_questions))
+        print("\n\n=====VERIFICATION=====\n\n")
+        print(verification)
+
+        return FinancialReportWorkflowOutput(
+            search_plan=search_plan,
+            report=report,
+            verification=verification,
+        )

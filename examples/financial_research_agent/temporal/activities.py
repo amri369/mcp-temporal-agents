@@ -3,12 +3,14 @@ from agents import Runner
 from examples.financial_research_agent.openai_agents.planner_agent import get_planner_agent
 from examples.financial_research_agent.openai_agents.search_agent import get_search_agent
 from examples.financial_research_agent.openai_agents.writer_agent import get_writer_agent_with_tools
+from examples.financial_research_agent.openai_agents.verifier_agent import get_verification_agent
 from examples.financial_research_agent.models import AgentRunnerParams
 
 agents_mapper = {
     "FinancialPlannerAgent": get_planner_agent,
     "FinancialSearchAgent": get_search_agent,
     "FinancialWriterAgent": get_writer_agent_with_tools,
+    "VerificationAgent": get_verification_agent,
 }
 
 @activity.defn

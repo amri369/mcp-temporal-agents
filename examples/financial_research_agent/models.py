@@ -42,3 +42,8 @@ class AgentsChoices(str, Enum):
 class AgentRunnerParams(BaseModel):
     agent_choice: AgentsChoices
     message: str
+
+class FinancialReportWorkflowOutput(BaseModel):
+    search_plan: FinancialSearchPlan
+    report: FinancialReportData
+    verification: VerificationResult
