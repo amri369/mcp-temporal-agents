@@ -22,7 +22,7 @@ source .venv/bin/activate
 In this example, we package the prompts of [the financial analyst example](https://github.com/openai/openai-agents-python/tree/main/examples/financial_research_agent) in an MCP server. 
 In addition, we add a few tools as illustration examples
 ```
-uvicorn examples.mcp_server.main:app --reload --port 9000
+uv run uvicorn examples.mcp_server.main:app --reload --port 9000
 ```
 
 # 3. Start a Temporal server
