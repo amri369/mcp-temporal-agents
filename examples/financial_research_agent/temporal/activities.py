@@ -1,51 +1,20 @@
 from temporalio import activity
-from agents import Runner, WebSearchTool
-from examples.financial_research_agent.openai_agents.finiancials_agent import get_financial_planner_agent
-from examples.financial_research_agent.models import (
-    AgentRunnerParams, AnalysisSummary,
-    VerificationResult, FinancialReportData
-)
+from agents import Runner
+from examples.financial_research_agent.openai_agents.planner_agent import get_planner_agent
+from examples.financial_research_agent.openai_agents.search_agent import get_search_agent
+from examples.financial_research_agent.openai_agents.writer_agent import get_writer_agent_with_tools
+from examples.financial_research_agent.models import AgentRunnerParams
 
 agents_mapper = {
-    "FinancialPlannerAgent": get_financial_planner_agent(),
-    # "FinancialSearchAgent": partial(
-    #     get_mcp_agent,
-    #     agent_name="FinancialSearchAgent",
-    #     prompt_name="search_prompt",
-    #     tools=[WebSearchTool()],
-    #     output_type=AnalysisSummary,
-    # ),
-    # "FundamentalsAnalystAgent": partial(
-    #     get_mcp_agent,
-    #     agent_name="FundamentalsAnalystAgent",
-    #     prompt_name="financials_prompt",
-    #     output_type=AnalysisSummary,
-    # ),
-    # "RiskAnalystAgent": partial(
-    #     get_mcp_agent,
-    #     agent_name="RiskAnalystAgent",
-    #     prompt_name="risk_prompt",
-    #     output_type=AnalysisSummary,
-    # ),
-    # "FinancialWriterAgent": partial(
-    #     get_mcp_agent,
-    #     agent_name="FinancialWriterAgent",
-    #     prompt_name="writer_prompt",
-    #     output_type=FinancialReportData,
-    # ),
-    # "VerificationAgent": partial(
-    #     get_mcp_agent,
-    #     agent_name="VerificationAgent",
-    #     prompt_name="verifier_prompt",
-    #     output_type=VerificationResult,
-    # ),
+    "FinancialPlannerAgent": get_planner_agent,
+    "FinancialSearchAgent": get_search_agent,
+    "FinancialWriterAgent": get_writer_agent_with_tools,
 }
 
 @activity.defn
 async def run_agent_activity(params: AgentRunnerParams):
-    async with agents_mapper[params.agent_choice] as agent:
-        activity.logger.info(
-            f"Running agent: {params.agent_choice}"
-        )
+    factory = agents_mapper[params.agent_choice]
+    async with factory() as agent:
+        activity.logger.info(f"Running agent: {params.agent_choice}")
         result = await Runner.run(starting_agent=agent, input=params.message)
         return result.final_output

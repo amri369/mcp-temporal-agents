@@ -36,8 +36,6 @@ class FinancialReportData(BaseModel):
 class AgentsChoices(str, Enum):
     FinancialPlannerAgent       = "FinancialPlannerAgent"
     FinancialSearchAgent        = "FinancialSearchAgent"
-    FundamentalsAnalystAgent    = "FundamentalsAnalystAgent"
-    RiskAnalystAgent            = "RiskAnalystAgent"
     FinancialWriterAgent        = "FinancialWriterAgent"
     VerificationAgent           = "VerificationAgent"
 

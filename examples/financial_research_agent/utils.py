@@ -51,25 +51,3 @@ def get_agent(
             )
 
     return Agent(name=name, instructions=instructions)
-
-@asynccontextmanager
-async def get_mcp_agent(
-        agent_name: str,
-        prompt_name: str,
-        output_type: Any = None,
-        tools: List[Tool | str] | None = None,
-) -> AsyncIterator[Agent]:
-
-    server = make_server()
-    async with server as s:
-        instructions = await s.session.get_prompt(prompt_name)
-        prompt_text = instructions.messages[0].content.text
-        agent = get_agent(
-            name=agent_name,
-            instructions=prompt_text,
-            mcp_servers=[s],
-            output_type=output_type,
-            tools=tools
-        )
-
-        yield agent
