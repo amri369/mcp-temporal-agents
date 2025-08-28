@@ -1,5 +1,4 @@
-from contextlib import asynccontextmanager
-from typing import Any, AsyncIterator, List
+from typing import Any, List
 
 from agents import Agent, Tool
 from agents.mcp import MCPServer, MCPServerStreamableHttp, create_static_tool_filter
