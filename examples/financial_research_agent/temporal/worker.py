@@ -5,8 +5,8 @@ from temporalio.client import Client
 from temporalio.worker import Worker
 
 from config import settings
-from tasks.activities import run_agent_activity
-from tasks.workflows import FinancialResearchWorkflow
+from examples.financial_research_agent.temporal.activities import run_agent_activity
+from examples.financial_research_agent.temporal.workflows import FinancialResearchWorkflow
 
 if settings.logfire_token:
     logfire.configure(token=settings.logfire_token)

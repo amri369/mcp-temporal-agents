@@ -1,11 +1,9 @@
 import asyncio
 
-import logfire
 from temporalio.client import Client
-from temporalio.contrib.openai_agents import OpenAIAgentsPlugin
 
 from config import settings
-from tasks.workflows import (
+from examples.financial_research_agent.temporal.workflows import (
     FinancialResearchWorkflow,
 )
 
@@ -18,9 +16,6 @@ async def main():
 
     client = await Client.connect(
         settings.temporal_server_url,
-        plugins=[
-            OpenAIAgentsPlugin(),
-        ],
     )
 
     print(f"Starting financial research for: {query}")

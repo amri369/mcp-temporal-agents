@@ -1,12 +1,11 @@
-import asyncio
 from datetime import timedelta
 from temporalio import workflow
 
 with workflow.unsafe.imports_passed_through():
-    from financial_agents.models import (
+    from examples.financial_research_agent.models import (
         AgentRunnerParams, AgentsChoices, FinancialSearchPlan
     )
-    from tasks.activities import run_agent_activity
+    from examples.financial_research_agent.temporal.activities import run_agent_activity
 
 @workflow.defn
 class FinancialResearchWorkflow:

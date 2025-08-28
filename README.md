@@ -41,11 +41,11 @@ Execute the following command to start a worker to run the examples.
 Ensure that all your environment variables reside at file .env.
 
 ```bash
-uv run --env-file .env examples/worker.py
+uv run --env-file .env examples/financial_research_agent/temporal/worker.py
 ```
 
 # 5. Start the financial analyst agent
 
 ```bash
-uv run --env-file .env examples/main.py
+uv run --env-file .env examples/financial_research_agent/main.py
 ```

@@ -1,7 +1,7 @@
 import contextlib
 from fastapi import FastAPI
 
-from examples.mcp_server.server import mcp as mcp_server
+from examples.mcp_server.financial_research_server import mcp as mcp_server
 
 @contextlib.asynccontextmanager
 async def lifespan(app_: FastAPI):

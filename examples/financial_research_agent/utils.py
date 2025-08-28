@@ -6,10 +6,6 @@ from agents.mcp import MCPServer, MCPServerStreamableHttp, create_static_tool_fi
 from agents.model_settings import ModelSettings
 
 from config import settings
-from financial_agents.models import (
-    AnalysisSummary, FinancialSearchPlan,
-    VerificationResult, FinancialReportData
-)
 
 mcp_server_url = f"{settings.mcp_server_url}/financials/mcp"
 
@@ -76,18 +72,4 @@ async def get_mcp_agent(
             tools=tools
         )
 
-        yield agent
-
-@asynccontextmanager
-async def get_financial_planner_agent() -> AsyncIterator[Agent]:
-    server = make_server()
-    async with server as s:
-        instructions = await s.session.get_prompt("planner_prompt")
-        prompt_text = instructions.messages[0].content.text
-        agent = get_agent(
-            name="FinancialPlannerAgent Agent",
-            instructions=prompt_text,
-            mcp_servers=[s],
-            output_type=FinancialSearchPlan,
-        )
         yield agent
