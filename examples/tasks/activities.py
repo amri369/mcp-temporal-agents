@@ -1,19 +1,14 @@
 from functools import partial
 from temporalio import activity
 from agents import Runner, WebSearchTool
-from financial_agents.helpers import get_mcp_agent
+from financial_agents.helpers import get_mcp_agent, get_financial_planner_agent
 from financial_agents.models import (
     AgentRunnerParams, AnalysisSummary, FinancialSearchPlan,
     VerificationResult, FinancialReportData
 )
 
 agents_mapper = {
-    "FinancialPlannerAgent": partial(
-        get_mcp_agent,
-        agent_name="FinancialPlannerAgent",
-        prompt_name="planner_prompt",
-        output_type=FinancialSearchPlan,
-    ),
+    "FinancialPlannerAgent": get_financial_planner_agent(),
     "FinancialSearchAgent": partial(
         get_mcp_agent,
         agent_name="FinancialSearchAgent",
@@ -49,9 +44,9 @@ agents_mapper = {
 
 @activity.defn
 async def run_agent_activity(params: AgentRunnerParams):
-    async with agents_mapper[params.agent_choice]() as agent:
+    async with agents_mapper[params.agent_choice] as agent:
         activity.logger.info(
-            f"Running agent: {params.agent_choice} with message {params.message}"
+            f"Running agent: {params.agent_choice}"
         )
         result = await Runner.run(starting_agent=agent, input=params.message)
         return result.final_output

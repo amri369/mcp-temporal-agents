@@ -29,24 +29,26 @@ class FinancialResearchWorkflow:
 
         search_plan = FinancialSearchPlan(**search_plan)
 
-        search_activities = []
-        for search_item in search_plan.searches:
-            payload = AgentRunnerParams(
-                agent_choice=AgentsChoices.FinancialSearchAgent,
-                message=search_item.query
-            )
-            search_activities.append(
-                workflow.execute_activity(
-                    run_agent_activity,
-                    payload,
-                    start_to_close_timeout=timedelta(
-                        seconds=60
-                    ),
-                    schedule_to_close_timeout=timedelta(
-                        seconds=60
-                    ),
-                )
-            )
+        return search_plan
 
-        search_results = await asyncio.gather(*search_activities)
-        return search_results
+        # search_activities = []
+        # for search_item in search_plan.searches:
+        #     payload = AgentRunnerParams(
+        #         agent_choice=AgentsChoices.FinancialSearchAgent,
+        #         message=search_item.query
+        #     )
+        #     search_activities.append(
+        #         workflow.execute_activity(
+        #             run_agent_activity,
+        #             payload,
+        #             start_to_close_timeout=timedelta(
+        #                 seconds=60
+        #             ),
+        #             schedule_to_close_timeout=timedelta(
+        #                 seconds=60
+        #             ),
+        #         )
+        #     )
+        #
+        # search_results = await asyncio.gather(*search_activities)
+        # return search_results
