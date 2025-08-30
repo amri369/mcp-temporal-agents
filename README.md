@@ -19,12 +19,16 @@ source .venv/bin/activate
 ```
 
 # 2. Run the MCP FastAPI Server on a custom port
-In this example, we package the prompts of [the financial analyst example](https://github.com/openai/openai-agents-python/tree/main/examples/financial_research_agent) in an MCP server. 
-In addition, we add a few tools as illustration examples
+In this example, we package the prompts of [the financial analyst example](https://github.com/openai/openai-agents-python/tree/main/examples/financial_research_agent) in an MCP server.
 ```
 uv run uvicorn examples.mcp_server.main:app --reload --port 9000
 ```
 
+To inspect and interact with the server, run:
+```
+mcp dev examples/mcp_server/financial_research_server.py
+```
+This command shows the available tools, schemas, and prompt interfaces exposed by the MCP server.
 # 3. Start a Temporal server
 Execute the following commands to start a pre-built image along with all the dependencies.
 

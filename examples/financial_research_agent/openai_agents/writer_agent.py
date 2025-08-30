@@ -1,7 +1,7 @@
 from contextlib import AsyncExitStack, asynccontextmanager
 from typing import AsyncIterator
 
-from agents import Agent, RunResult
+from agents import Agent, ModelSettings, RunResult
 
 from examples.financial_research_agent.models import FinancialReportData
 from examples.financial_research_agent.utils import get_agent, make_server
@@ -52,5 +52,8 @@ async def get_writer_agent_with_tools() -> AsyncIterator[Agent]:
             custom_output_extractor=_summary_extractor,
         )
 
-        writer_with_tools = writer_agent.clone(tools=[fundamentals_tool, risk_tool])
+        writer_with_tools = writer_agent.clone(
+            tools=[fundamentals_tool, risk_tool],
+            model_settings=ModelSettings(parallel_tool_calls=True),
+        )
         yield writer_with_tools

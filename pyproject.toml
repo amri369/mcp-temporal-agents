@@ -9,7 +9,8 @@ authors = [{ name = "Mohamed Amri", email = "amri369@gmail.com"}]
 dependencies = [
     "fastapi==0.115.8",
     "logfire==4.3.6",
-    "openai-agents==0.2.9",
+    "mcp[cli]>=1.12.4",
+    "openai-agents==0.2.10",
     "pydantic==2.11.7",
     "pytest==8.3.3",
     "ruff==0.12.8",
