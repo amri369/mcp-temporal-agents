@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="assets/Temporal-Openai-Integration.png"
+       alt="System Architecture"
+       title="System Architecture"
+       width="600">
+</p>
+
 # Summary
 
 This project shows how to build **durable AI agents** using four production-grade components:
