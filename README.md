@@ -1,10 +1,3 @@
-<p align="center">
-  <img src="assets/Temporal-Openai-Integration.png"
-       alt="System Architecture"
-       title="System Architecture"
-       width="600">
-</p>
-
 # Summary
 
 This project shows how to build **durable AI agents** using four production-grade components:
@@ -13,6 +6,10 @@ This project shows how to build **durable AI agents** using four production-grad
 - [Temporal Python SDK](https://github.com/temporalio/sdk-python) — durable workflows, retries, and long-running tasks
 - [Model Context Protocol (MCP)](https://github.com/modelcontextprotocol/python-sdk) — standard interface for tools and data sources
 - **(Optional)** [Pydantic Logfire](https://pydantic.dev/logfire) — unified observability (logs, traces, metrics) with native LLM & agent instrumentation
+
+<p align="center">
+  <img src="assets/Temporal-Openai-Integration.png" alt="System Architecture" width="50%">
+</p>
 
 If you’re tired of debugging Celery tasks, running into scalability limits, or wrestling with LangGraph dependency issues, this tutorial is for you.
 
@@ -36,6 +33,9 @@ To inspect and interact with the server, run:
 mcp dev examples/mcp_server/financial_research_server.py
 ```
 This command shows the available tools, schemas, and prompt interfaces exposed by the MCP server.
+<p align="center">
+  <img src="assets/mcp-inspector.png" alt="MCP Inspector" width="75%">
+</p>
 # 3. Start a Temporal server
 Execute the following commands to start a pre-built image along with all the dependencies.
 
@@ -59,7 +59,9 @@ uv run --env-file .env examples/financial_research_agent/temporal/worker.py
 export PYTHONPATH=.
 uv run --env-file .env examples/financial_research_agent/main.py
 ```
-
+<p align="center">
+  <img src="assets/Temporal-UI.png" alt="Temporal UI Showing Agents Orchestration" width="75%">
+</p>
 # 6. Credit
 
 This example is inspired by these two great examples:
